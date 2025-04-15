@@ -6,6 +6,7 @@ require_once('../app.php');
 $auth_user = [];
 $auth_user = $_SESSION[APP_KEY]['auth_user'];
 if (empty($auth_user)) {
+    // ログインしていない場合はログイン画面にリダイレクト
     header('Location: ../login/');
     exit;
 }
