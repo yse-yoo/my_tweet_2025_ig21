@@ -17,6 +17,7 @@ $tweets = range(1, 5);
 <html lang="ja">
 
 <!-- TODO: コンポーネント: components/head.php -->
+<?php include COMPONENT_DIR . 'head.php' ?>
 
 <body>
 
@@ -24,7 +25,7 @@ $tweets = range(1, 5);
 
         <header class="w-1/5 p-3 border-r min-h-screen">
             <!-- TODO: components/nav.php 読み込み -->
-            レイアウト（サイドメニュー）
+            <?php include COMPONENT_DIR . 'nav.php' ?>
         </header>
 
         <main class="w-4/5 pt-3">
