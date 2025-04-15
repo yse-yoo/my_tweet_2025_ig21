@@ -12,6 +12,9 @@ if (isset($_SESSION[APP_KEY]['regist'])) {
 
 // TODO: セッション APP_KEY の errors があれば取得
 $errors = [];
+if (isset($_SESSION[APP_KEY]['errors'])) {
+    $errors = $_SESSION[APP_KEY]['errors'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +27,6 @@ $errors = [];
     <main id="regist" class="flex justify-center">
         <div class="w-1/2 mt-3 p-5 shadow-md">
             <h2 class="text-2xl mb-3 font-normal text-center">Sign Up</h2>
-            <!-- エラーの public を表示 -->
-            <?php if (isset($errors['public'])) : ?>
-                <div class="text-red-500 text-sm mb-3">
-                    <?= h($errors['public']) ?>
-                </div>
-            <?php endif; ?>
-
             <!-- Form -->
             <!-- regist/add.php に POSTリクエスト -->
             <form action="regist/add.php" method="post">
