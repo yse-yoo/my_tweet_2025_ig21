@@ -21,7 +21,11 @@ $_SESSION[APP_KEY]['regist'] = $posts;
 // TODO: Userモデルでユーザ登録(insert)を実行
 $auth_user = [];
 // TODO: 仮のユーザIDを設定
-// $auth_user['id'] = 1; 
+if ($posts['account_name'] === 'user1') {
+    $auth_user['id'] = 1; // 仮のユーザID
+} else {
+    $auth_user['id'] = null;
+}
 
 if (empty($auth_user['id'])) {
     // TODO: エラーを APP_KEY > errors > public セッションに保存
