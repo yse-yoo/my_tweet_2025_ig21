@@ -31,13 +31,14 @@ $tweets = range(1, 5);
         <main class="w-4/5 pt-3">
             <div class="row">
                 <!-- TODO: components/tweet_form.php 読み込み -->
-                レイアウト（メインコンテンツ）
+                <?php include COMPONENT_DIR . 'tweet_form.php' ?>
             </div>
 
             <? if ($tweets) : ?>
                 <?php foreach ($tweets as $value): ?>
                     <div class="row">
                         <!-- TODO: components/tweet.php 読み込み -->
+                        <?php include COMPONENT_DIR . 'tweet.php' ?>
                     </div>
                 <?php endforeach ?>
             <? endif ?>
