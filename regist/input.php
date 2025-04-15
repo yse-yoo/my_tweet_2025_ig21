@@ -29,7 +29,7 @@ $errors = [];
             <?php endif; ?>
 
             <!-- Form -->
-            <!-- TODO: regist/add.php に POSTリクエスト -->
+            <!-- regist/add.php に POSTリクエスト -->
             <form action="regist/add.php" method="post">
                 <div class="relative mb-4">
                     <input type="text" name="account_name"

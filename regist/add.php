@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 // POSTデータ取得
 $posts = $_POST;
+// var_dump($posts);
 
 // TODO: セッションの APP_KEY 下の regist にPOSTデータを保存
 $_SESSION[APP_KEY]['regist'] = $posts;
@@ -25,8 +26,10 @@ $auth_user = [];
 if (empty($auth_user['id'])) {
     // TODO: エラーを APP_KEY > errors > public セッションに保存
     // TODO: 入力画面(input.php)にリダイレクト
+    header('Location: input.php');
     exit;
 } else {
-    // TODO: 登録成功の場合は完了画面(login/)へリダイレクト
+    // TODO: 登録成功の場合はログイン画面(login/)へリダイレクト
+    header('Location: ../login/');
     exit;
 }

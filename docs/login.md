@@ -1,6 +1,4 @@
 ```mermaid
-%%{init:{'theme':'base'}}%%
-
 flowchart TD
     A[ログイントップ] 
     A -- リダイレクト --> B[入力画面]
