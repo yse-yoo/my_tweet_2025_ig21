@@ -10,8 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 // POSTデータ取得
-$posts = $_POST;
-// var_dump($posts);
+$posts = sanitize($_POST);
 
 // TODO: セッションの APP_KEY 下の regist にPOSTデータを保存
 $_SESSION[APP_KEY]['regist'] = $posts;
