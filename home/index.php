@@ -3,9 +3,11 @@
 require_once('../app.php');
 
 // TODO: ユーザセッションの確認し、ログインしていない場合はログイン画面にリダイレクト
-
-// TODO: セッションからユーザ情報を取得
-$user = [];
+$auth_user = $_SESSION[APP_KEY]['auth_user'];
+if (empty($auth_user)) {
+    header('Location: ../login/');
+    exit;
+}
 
 // ユーザセッションの取得
 // TODO: Tweet投稿一覧を取得
