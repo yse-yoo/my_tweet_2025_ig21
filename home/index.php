@@ -3,6 +3,7 @@
 require_once('../app.php');
 
 // TODO: ユーザセッションの確認し、ログインしていない場合はログイン画面にリダイレクト
+$auth_user = [];
 $auth_user = $_SESSION[APP_KEY]['auth_user'];
 if (empty($auth_user)) {
     header('Location: ../login/');
