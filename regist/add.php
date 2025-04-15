@@ -34,6 +34,8 @@ if (empty($auth_user['id'])) {
     header('Location: input.php');
     exit;
 } else {
+    // $_SESSION[APP_KEY]['auth_user'] = $auth_user;
+    // header('Location: ../home/');
     // TODO: 登録成功の場合はログイン画面(login/)へリダイレクト
     header('Location: ../login/');
     exit;
