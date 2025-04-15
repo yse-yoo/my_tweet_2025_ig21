@@ -6,6 +6,9 @@ require_once "../app.php";
 
 // TODO: セッション APP_KEY の regist があれば取得
 $regist = [];
+if (isset($_SESSION[APP_KEY]['regist'])) {
+    $regist = $_SESSION[APP_KEY]['regist'];
+}
 
 // TODO: セッション APP_KEY の errors があれば取得
 $errors = [];
