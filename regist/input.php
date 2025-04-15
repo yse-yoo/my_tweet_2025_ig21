@@ -14,6 +14,7 @@ if (isset($_SESSION[APP_KEY]['regist'])) {
 $errors = [];
 if (isset($_SESSION[APP_KEY]['errors'])) {
     $errors = $_SESSION[APP_KEY]['errors'];
+    unset($_SESSION[APP_KEY]['errors']);
 }
 ?>
 
