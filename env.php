@@ -12,7 +12,7 @@ const DB_PASSWORD = '';
 const APP_KEY = "php_sns";
 
 // サイトタイトル
-const SITE_TITLE = "PHP SNS";
+const SITE_TITLE = "My Tweet";
 
 // サイトベースURL
 define('BASE_URL', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'));

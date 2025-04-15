@@ -2,6 +2,8 @@
 // 共通アプリファイル読み込み
 require_once "../app.php";
 
+// var_dump(COMPONENT_DIR);
+
 // TODO: セッション APP_KEY の regist があれば取得
 $regist = [];
 
@@ -13,6 +15,7 @@ $errors = [];
 <html lang="ja">
 
 <!-- TODO: components/head.php を読み込み -->
+<?php include COMPONENT_DIR . 'head.php'; ?>
 
 <body>
     <main id="regist" class="flex justify-center">

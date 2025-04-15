@@ -1,4 +1,5 @@
 <?php
+// 設定ファイルを読み込み
 require_once "env.php";
 
 // セッション開始
