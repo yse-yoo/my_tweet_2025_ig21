@@ -20,12 +20,8 @@ $password = $_POST['password'];
 // exit;
 
 // TODO: ユーザ認証: new User() で auth() を実行
-$auth_user = [];
-if ($account_name === 'user1') {
-    $auth_user['id'] = 1; // 仮のユーザID
-} else {
-    $auth_user['id'] = null;
-}
+$user = new User();
+$auth_user = $user->auth($account_name, $password); 
 
 if (empty($auth_user['id'])) {
     // ログイン失敗時はログイン入力画面にリダイレクト
