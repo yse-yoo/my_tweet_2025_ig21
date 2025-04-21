@@ -10,15 +10,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 // POSTデータ取得
+// TODO: サニタイズ
 $posts = sanitize($_POST);
 
 // TODO: セッションの APP_KEY 下の regist にPOSTデータを保存
 $_SESSION[APP_KEY]['regist'] = $posts;
 
-// TODO: サニタイズ
-
 // TODO: Userモデルでユーザ登録(insert)を実行
-$auth_user = [];
+$user = new User();
+$auth_user['id'] = $user->insert($posts);
+
 // TODO: 仮のユーザIDを設定
 if ($posts['account_name'] === 'user1') {
     $auth_user['id'] = 1; // 仮のユーザID

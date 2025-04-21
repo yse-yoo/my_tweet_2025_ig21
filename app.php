@@ -15,9 +15,22 @@ const LIB_DIR = __DIR__ . "/lib/";
 // components/ ディレクトリパス
 const COMPONENT_DIR = __DIR__ . "/components/";
 
+// upload image base path
+const UPLOADS_BASE = "images/uploads/";
+// profile image base path
+const PROFILE_BASE = "images/profile/";
+// upload image dir
+const UPLOADS_DIR = __DIR__ . UPLOADS_BASE;
+// profile image dir
+const PROFILE_DIR = __DIR__ . PROFILE_BASE;
+
 // ライブラリ読み込み
 require_once LIB_DIR . 'Database.php';
 require_once LIB_DIR . 'Sanitize.php';
+require_once LIB_DIR . 'File.php';
 
 // モデルクラスの読み込み
 require_once APP_DIR . 'models/User.php';
+require_once APP_DIR . 'models/Tweet.php';
+require_once APP_DIR . 'models/Like.php';
+require_once APP_DIR . 'models/AuthUser.php';
