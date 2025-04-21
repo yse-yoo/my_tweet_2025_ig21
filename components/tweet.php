@@ -26,7 +26,7 @@
                 <li class="flex">
                     <a href="#" class="inline-flex items-center space-x-2">
                         <img src="svg/heart.svg" class="w-4" alt="いいね">
-                        <span class="text-gray-600 text-xs">333</span>
+                        <span class="text-gray-600 text-xs"><?= $value['like_count'] ?></span>
                     </a>
                 </li>
                 <li>
