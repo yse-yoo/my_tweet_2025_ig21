@@ -12,7 +12,10 @@
             </div>
             <!-- ポップアップ（初期状態は非表示） -->
             <div id="user-popup" class="hidden absolute left-0 m-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
-                <a href="user/logout.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">ログアウト</a>
+                <a href="user/logout.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <?= $auth_user['account_name'] ?>
+                    からログアウト
+                </a>
             </div>
         </li>
     </ul>
