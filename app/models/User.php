@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 use PDOException;
 use Database;
+use File;
 
 class User
 {
@@ -27,17 +28,35 @@ class User
     public function find(int $id)
     {
         try {
-            // DB接続
             $pdo = Database::getInstance();
-            // SQL作成
             $sql = "SELECT * FROM users WHERE id = :id";
-            // SQL事前準備
             $stmt = $pdo->prepare($sql);
-            // プレースホルダー（:id）の値をバインドしてSQL実行
             $stmt->execute(['id' => $id]);
-            // ユーザデータ取得
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            // ユーザデータを連想配列として返す
+            return $user;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit;
+        }
+    }
+
+    /**
+     * ユーザデータを取得
+     *
+     * @param string $account_name ユーザのアカウント名
+     * @return array|null ユーザデータの連想配列、もしくは該当するユーザがなければ null
+     */
+    public function findForExists($posts)
+    {
+        try {
+            $account_name = $posts['account_name'];
+            $email = $posts['email'];
+
+            $pdo = Database::getInstance();
+            $sql = "SELECT * FROM users WHERE account_name = :account_name OR email = :email";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['account_name' => $account_name, 'email' => $email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
             return $user;
         } catch (PDOException $e) {
             error_log($e->getMessage());
@@ -56,23 +75,50 @@ class User
         try {
             // パスワードのハッシュ化
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-            // DB接続
             $pdo = Database::getInstance();
-            // INSERT用SQL（テーブル名やカラム名は適宜変更）
             $sql = "INSERT INTO users (account_name, email, display_name, password) 
                     VALUES (:account_name, :email, :display_name, :password)";
-            // プリペアードステートメントの生成
             $stmt = $pdo->prepare($sql);
-            // SQL実行（データ配列のキーとプレースホルダーは一致させる）
             $result = $stmt->execute($data);
             if ($result) {
-                // 登録成功時は新規登録ユーザのIDを取得して返す
                 return $pdo->lastInsertId();
             }
         } catch (PDOException $e) {
-            error_log($e->getMessage());
+            echo $e->getMessage();
+            exit;
         }
         return;
+    }
+
+    /**
+     * ユーザデータを更新する
+     *
+     * @param int $id ユーザID
+     * @param array $data 更新するユーザデータ
+     * @return mixed 更新成功時はユーザデータの連想配列、失敗時は null
+     */
+    public function update($id, $data)
+    {
+        try {
+            $pdo = Database::getInstance();
+
+            $sql = "UPDATE users
+                    SET display_name = :display_name,
+                        profile = :profile
+                    WHERE id = :id;";
+
+            $stmt = $pdo->prepare($sql);
+
+            // 更新データバインド
+            $posts['id'] = $id;
+            $posts['display_name'] = $data['display_name'];
+            $posts['profile'] = $data['profile'];
+
+            return $stmt->execute($posts);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit;
+        }
     }
 
     /**
@@ -89,29 +135,16 @@ class User
         // SQL作成: アカウント名でユーザを検索
         $sql = "SELECT * FROM users WHERE account_name = :account_name";
         try {
-            // プリペアードステートメントでSQLを実行
             $stmt = $pdo->prepare($sql);
-            // プレースホルダー（:account_name）の値をバインドしてSQL実行
             $stmt->execute([':account_name' => $account_name]);
-            // ユーザデータ取得
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            // TODO: ユーザが存在し、password_verify() でパスワードの検証を実施
-            // TODO: ユーザを返す
-            return $user;
+            if ($user && password_verify($password, $user['password'])) {
+                return $user;
+            }
         } catch (PDOException $e) {
             error_log($e->getMessage());
         }
         return;
-    }
-
-    public static function icon($id)
-    {
-        $iconFilePath = BASE_DIR . "/images/user_icon/{$id}.png";
-        if ($id && file_exists($iconFilePath)) {
-            return "/images/user_icon/{$id}.png";
-        } else {
-            return "/images/me.png";
-        }
     }
 
 }
