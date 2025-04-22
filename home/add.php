@@ -15,6 +15,12 @@ $auth_user = AuthUser::checkLogin();
 // exit;
 
 // TODO: ユーザがいなかったらログイン画面にリダイレクト
+if (empty($auth_user)) {
+    // ログインしていない場合はログイン画面にリダイレクト
+    header('Location: ../login/');
+    exit;
+}
+
 // TODO: POSTデータを取得
 // TODO: 投稿処理
 
