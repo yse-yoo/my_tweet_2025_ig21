@@ -138,6 +138,8 @@ class User
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':account_name' => $account_name]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            // もしユーザがいれば、パスワードを検証
+            // password_hash()でハッシュ化されたパスワードと、入力されたパスワードを比較
             if ($user && password_verify($password, $user['password'])) {
                 return $user;
             }
