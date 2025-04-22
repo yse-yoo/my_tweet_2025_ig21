@@ -4,9 +4,23 @@ require_once "../app.php";
 use App\Models\AuthUser;
 use App\Models\User;
 
-$auth_user = AuthUser::checkLogin();
+// TODO: POSTリクエストの確認
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: ./');
+    exit;
+}
 
+// ログインチェック
+$auth_user = AuthUser::checkLogin();
+if (!$auth_user) {
+    header('Location: ./');
+    exit;
+}
+
+// POSTデータの取得
 $posts = sanitize($_POST);
+
+// ユーザ情報の更新
 $user = new User();
 $user->update($auth_user['id'], $posts);
 
