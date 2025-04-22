@@ -1,9 +1,15 @@
 <?php
 require_once '../app.php';
 
-// TODO: ユーザセッションの確認し、ログインしていない場合はログイン画面にリダイレクト
+use App\Models\AuthUser;
+use App\Models\User;
 
+// TODO: ユーザセッションの確認し、ログインしていない場合はログイン画面にリダイレクト
 // TODO: セッションからユーザ情報を取得
+$auth_user = AuthUser::checkLogin();
+
+$user = new User();
+$user_data = $user->find($auth_user['id']);
 ?>
 
 <!DOCTYPE html>
@@ -18,12 +24,7 @@ require_once '../app.php';
         </header>
 
         <main class="w-4/5 pt-3">
-            <div class="row">
-                <h2 class="text-2xl mb-3 font-normal text-center">ユーザホーム</h2>
-                <div class="mb-4">
-                    <p class="text-center text-gray-700 text-md"><?= $user['account_name'] ?? '' ?>さん</p>
-                </div>
-            </div>
+            <?php include COMPONENT_DIR . 'dashboard.php' ?>
         </main>
     </div>
 </body>
