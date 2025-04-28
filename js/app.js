@@ -27,3 +27,14 @@ function inputTestLoginUser() {
     document.getElementById('account_name').value = 'user1';
     document.getElementById('password').value = '1111';
 }
+
+function updateLike(target) {
+    target.closest('form').submit()
+}
+
+function deleteTweet(target) {
+    if (!confirm('削除しますか？')) {
+        return;
+    }
+    target.closest('form').submit()
+}
