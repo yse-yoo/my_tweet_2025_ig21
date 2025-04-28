@@ -138,8 +138,6 @@ class User
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':account_name' => $account_name]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            // もしユーザがいれば、パスワードを検証
-            // password_hash()でハッシュ化されたパスワードと、入力されたパスワードを比較
             if ($user && password_verify($password, $user['password'])) {
                 return $user;
             }
@@ -149,4 +147,42 @@ class User
         return;
     }
 
+    /**
+     * ユーザのプロフィール画像をアップロードする
+     *
+     * @param int $user_id ユーザID
+     * @return string|null アップロードされた画像のパス、失敗時は null
+     */
+    public function uploadProfileImage($user_id)
+    {
+        $profile_image = File::upload(PROFILE_BASE, $user_id);
+        try {
+            $pdo = Database::getInstance();
+            $sql = "UPDATE users SET profile_image = :profile_image WHERE id = :id;";
+            $stmt = $pdo->prepare($sql);
+
+            return $stmt->execute([
+                'id' => $user_id,
+                'profile_image' => $profile_image
+            ]);
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+        }
+    }
+
+    /**
+     * プロフィール画像の保存先パスを取得する
+     *
+     * @param int $user_id ユーザID
+     * @return string プロフィール画像の保存先パス
+     */
+    public static function profileImage($profile_image)
+    {
+        // プロフィール画像のパスを取得
+        $localPath = BASE_DIR . '/' . $profile_image;
+        if ($profile_image && file_exists($localPath)) {
+            return $profile_image . "?" . time();
+        }
+        return "images/me.png";
+    }
 }
