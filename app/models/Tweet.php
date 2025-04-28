@@ -225,6 +225,7 @@ class Tweet
     {
         try {
             $data['user_id'] = $user_id;
+            // 画像アップロード
             $data['image_path'] = $this->uploadImage();
 
             $pdo = Database::getInstance();
