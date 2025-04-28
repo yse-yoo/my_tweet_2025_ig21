@@ -5,7 +5,7 @@ use App\Models\User;
 
 <div class="px-6">
     <div class="py-6 flex justify-center cursor-pointer">
-        <img id="preview-image" src="images/me.png" class="w-32 h-32 object-cover rounded-full mb-4">
+        <img id="preview-image" src="<?= User::profileImage($auth_user['profile_image']) ?>" class="w-32 h-32 object-cover rounded-full mb-4">
     </div>
     <div class="text-center">
         <?php if ($auth_user['id'] == $user_data['id']): ?>
