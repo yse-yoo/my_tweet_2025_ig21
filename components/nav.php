@@ -10,6 +10,12 @@ use App\Models\User;
             </a>
         </li>
         <li>
+            <a href="home/grallary.php" class="inline-flex items-center">
+                <img src="svg/camera.svg" class="w-10 mr-2">
+                <span class="hidden md:inline">ギャラリー</span>
+            </a>
+        </li>
+        <li>
             <div id="user-menu" class="inline-flex items-center">
                 <img src="<?= User::profileImage($auth_user['profile_image']) ?>" class="rounded-full w-8 h-8">
             </div>
