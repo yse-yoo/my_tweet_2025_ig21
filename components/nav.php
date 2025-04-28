@@ -12,7 +12,7 @@ use App\Models\User;
         <li>
             <a href="home/grallary.php" class="inline-flex items-center">
                 <img src="svg/camera.svg" class="w-10 mr-2">
-                <span class="hidden md:inline">ギャラリー</span>
+                <span class="hidden md:inline">メディア</span>
             </a>
         </li>
         <li>
