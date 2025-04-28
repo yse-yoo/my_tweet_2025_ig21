@@ -29,6 +29,8 @@ $auth_user = $user->find($auth_user['id']);
             </div>
             <div class="w-full mt-3 p-5">
                 <h2 class="text-2xl mb-3 font-normal font-bold text-center">プロフィールを編集</h2>
+                <!-- ユーザ画像 -->
+                <?php include COMPONENT_DIR . 'user_upload_image.php' ?>
 
                 <!-- ユーザ編集フォーム -->
                 <?php include COMPONENT_DIR . 'user_form.php' ?>
