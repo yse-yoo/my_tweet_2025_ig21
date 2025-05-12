@@ -13,11 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // TODO: ログインユーザチェック
 $auth_user = AuthUser::checkLogin();
-// TODO: ユーザがいなかったらログイン画面にリダイレクト
-if (empty($auth_user['id'])) {
-    header('Location: ../login/');
-    exit;
-}
 
 // TODO: POSTデータを取得
 $posts = sanitize($_POST);
