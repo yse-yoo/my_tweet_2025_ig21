@@ -249,7 +249,7 @@ class Tweet
      * @param int $tweet_id 投稿ID
      * @return mixed 
      */
-    public function delete($id)
+    public function delete(int $id)
     {
         try {
             $pdo = Database::getInstance();
